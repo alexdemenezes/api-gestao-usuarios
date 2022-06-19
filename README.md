@@ -179,17 +179,17 @@ Exemplo:
 ```
 
 ##### username inválido! 400 
-Caso o username não seja passado ou não tenha o tamanho mínimo.
+Caso o nome de usuário não seja passado ou não tenha o tamanho mínimo.
 
 Exemplo:
-username não passado.
+nome de usuário não passado.
 ```
 {
   "message": "\"username\" is required"
 }
 ```
 
-username não tem o tamanho mínimo.
+nome de usuário não tem o tamanho mínimo.
 ```
 {
   "message": "\"username\" must be greater or equal to 6"
