@@ -5,10 +5,10 @@ class UsersMiddleware {
   public isUsernameValid(req: Request, res: Response, next: NextFunction) {
     const { username } = req.body;
     if(!username) {
-       return res.status(400).json({message: '"username" is required!'});
+       return res.status(400).json({message: '"username" is required'});
     }
     if(username.length < 6) {
-      return res.status(400).json({message: '"username" must be greater or equal to 6!'});
+      return res.status(400).json({message: '"username" must be greater or equal to 6'});
     }
     next();
   }
@@ -16,11 +16,11 @@ class UsersMiddleware {
   public isEmailValid(req: Request, res: Response, next: NextFunction) {
     const { email } = req.body;
     if(!email) {
-      return res.status(400).json({message: '"email" is required!'});
+      return res.status(400).json({message: '"email" is required'});
     }
     const valid = EmailValidator.validate(email);
     if(!valid) {
-      return res.status(400).json({message: 'Please provide a valid email address.'})
+      return res.status(400).json({message: 'Please provide a valid email address'})
     }
     next();
   }
@@ -28,10 +28,10 @@ class UsersMiddleware {
   public isPasswordValid(req: Request, res: Response, next: NextFunction) {
     const { password } = req.body;
     if(!password) {
-      return res.status(400).json({message: '"password" id required!'});
+      return res.status(400).json({message: '"password" id required'});
     }
     if(password.length < 8) {
-      return res.status(400).json({message: '"password" must be grater or equal to 8!'});
+      return res.status(400).json({message: '"password" must be grater or equal to 8'});
     }
     next();
   }

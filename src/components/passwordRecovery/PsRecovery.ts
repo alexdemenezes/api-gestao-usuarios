@@ -20,8 +20,8 @@ PsRecovery.init({
   modelName: 'ps_recoveries'
 });
 
-PsRecovery.belongsTo(User, { foreignKey: 'user_id' });
-User.hasMany(PsRecovery, { foreignKey: 'user_id'});
+PsRecovery.belongsTo(User, { foreignKey: 'user_id', onDelete: 'cascade' });
+User.hasMany(PsRecovery, { foreignKey: 'user_id', onDelete: 'cascade'});
 
 
 export default PsRecovery;

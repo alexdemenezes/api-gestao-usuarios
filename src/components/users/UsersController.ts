@@ -27,6 +27,9 @@ class UsersController {
   public async create(req: Request, res: Response): Promise<Response> {
     try {
       const result = await UsersService.create(req.body);
+      if(!result.status) {
+        return res.status(409).json({ message: result.message});
+      }
       return res.status(200).json({message: result.message});
     } catch (e) {
       return res.status(500).json({message: 'internal error'})
@@ -47,7 +50,7 @@ class UsersController {
       if (token && typeof token === 'string' ) {
         const result = await UsersService.validateAccount(token);
         if(!result.status) {
-          return res.status(500).json({message: result.message});
+          return res.status(404).json({message: result.message});
         }
         return res.status(200).send({message: result.message});
       }
@@ -66,7 +69,7 @@ class UsersController {
         return res.status(500).json({message: result.message});
       }
       if (result.message == 'Username already exist') {
-        return res.status(400).json({message: result.message})
+        return res.status(409).json({message: result.message})
       }
       return res.status(200).json({message: result.message});
   }
@@ -81,14 +84,14 @@ class UsersController {
     return res.status(200).json({message: result.message});
   }
 
-  public async adminDelete(req: Request, res: Response): Promise<Response> {
-    const {id } = req.params;
-    const result = await UsersService.delete(undefined, +id);
-    if(result.status) {
-      return res.status(200).json({message: result.message});
-    }
-    return res.status(500).json({ message: result.message});
-  }
+  // public async adminDelete(req: Request, res: Response): Promise<Response> {
+  //   const {id } = req.params;
+  //   const result = await UsersService.delete(undefined, +id);
+  //   if(result.status) {
+  //     return res.status(200).json({message: result.message});
+  //   }
+  //   return res.status(500).json({ message: result.message});
+  // }
 
   public async delete(req: Request, res: Response): Promise<Response> {
     const { email } = req.body.decoded;

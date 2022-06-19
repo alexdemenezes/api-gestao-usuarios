@@ -14,7 +14,7 @@ import 'dotenv/config';
         return res.status(401).json({message: 'token is invalid or expired'})
       }
     } else {
-      return res.status(401).json({message: 'token is required!'})
+      return res.status(401).json({message: 'token is required'})
     }
   } 
  }

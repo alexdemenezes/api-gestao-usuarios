@@ -17,7 +17,7 @@ class UsersService {
       });
   
       if (user) {
-        return { status: false, message: 'Username already exist' }
+        return { status: false, message: 'Username already exists' }
       }
       return { status: true, message: 'Valid username' }
     } catch (e) {
@@ -34,7 +34,7 @@ class UsersService {
       });
 
       if(user) {
-        return { status: false, message: 'Email already exist' };
+        return { status: false, message: 'Email already exists' };
       }
       return { status: true, message: 'Valid email' };
     } catch (e) {
@@ -146,7 +146,6 @@ class UsersService {
 
 
   public async validateAccount(token: string): Promise<status> {
-    try {
       const user = await User.findOne({
         where: {
           token,
@@ -162,9 +161,7 @@ class UsersService {
         return {status: true, message: 'your account has been verified'}
       }
       return {status: false, message: 'user not found'};
-    } catch (e) {
-      return {status: false, message: 'internal error'}
-    }
+    
   }
 
   public async updateUsername(email: string, newUsername: string): Promise<status> {
@@ -205,23 +202,16 @@ class UsersService {
     }
   }
 
-  public async delete(email: string | undefined = undefined, id: number | undefined = undefined): Promise<status> {
+  public async delete(email: string): Promise<status> {
     try {
-      if(email) {
         await User.destroy({
           where: {
             email,
           }
         });
-        return { status: true, message: 'resource deleted successfully'}
-      }
-      await User.destroy({
-        where: {
-          id,
-        }
-      });
       return { status: true, message: 'resource deleted successfully'}
     } catch (e) {
+      console.log(e)
       return { status: false, message: 'internal error'};
     }
   }

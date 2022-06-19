@@ -20,5 +20,7 @@ CREATE TABLE ps_recovery (
   user_id INT NOT NULL,
   used INT DEFAULT 0,
   PRIMARY KEY(id),
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  ON DELETE CASCADE,
+  ON UPDATE CASCADE
 );
