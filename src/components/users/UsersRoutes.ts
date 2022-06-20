@@ -48,11 +48,11 @@ router.delete(
   (req: Request, res: Response, next: NextFunction) => AuthMiddleware.verifyToken(req, res, next),
   (req: Request, res: Response) => UsersController.delete(req, res)); 
 
-// router.delete(
-//   '/admin/:id',
-//   (req: Request, res: Response, next: NextFunction) => AuthMiddleware.verifyToken(req, res, next),
-//   (req: Request, res: Response, next: NextFunction) => UsersMiddleware.isAdmin(req, res, next),
-//   (req: Request, res: Response) => UsersController.adminDelete(req, res)); 
+router.delete(
+  '/admin/:id',
+  (req: Request, res: Response, next: NextFunction) => AuthMiddleware.verifyToken(req, res, next),
+  (req: Request, res: Response, next: NextFunction) => UsersMiddleware.isAdmin(req, res, next),
+  (req: Request, res: Response) => UsersController.adminDelete(req, res)); 
   
 
 export default router;

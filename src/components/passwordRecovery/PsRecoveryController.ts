@@ -12,9 +12,6 @@ class PsRecoveryController {
   if(!result.status && result.message === 'internal error') {
     return res.status(500).json({message: result.message});
   }
-  if(!result.status && result.message === 'token has been already used') {
-    return res.status(401).json({ message: result.message})
-  }
   return res.status(200).json({message: result.message});
  }
 
@@ -22,8 +19,11 @@ class PsRecoveryController {
   const { token } = req.params;
   const { password } = req.body;
   const result = await PsRecoveryService.updatePassword(token, password);
-  if(!result.status) {
+  if(!result.status && result.message !== 'token has been already used') {
     return res.status(500).json({ message: 'internal erorr'});
+  }
+  if(!result.status && result.message === 'token has been already used') {
+    return res.status(409).json({ message: result.message})
   }
   return res.status(200).json({message: result.message});
  }

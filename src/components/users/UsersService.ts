@@ -215,6 +215,24 @@ class UsersService {
       return { status: false, message: 'internal error'};
     }
   }
+
+  public async adminDelete(id: number): Promise<status> {
+    try {
+       const user = await User.destroy({
+          where: {
+            id,
+          }
+        });
+        if(user) {
+          return { status: true, message: 'resource deleted successfully'}
+        }
+        return { status: false, message: 'user not found'}
+    } catch (e) {
+      console.log(e)
+      return { status: false, message: 'internal error'};
+    }
+  }
+
 }
 
 export default new UsersService;

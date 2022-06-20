@@ -51,7 +51,7 @@ class EmailSender {
         const mailOptions = this.recoveryPassword(to, token);
         await transporter.sendMail(mailOptions);
       } catch (e) {
-        
+        console.log(e);
       }
 
     }

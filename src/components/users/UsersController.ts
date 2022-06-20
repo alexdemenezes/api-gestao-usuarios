@@ -84,14 +84,17 @@ class UsersController {
     return res.status(200).json({message: result.message});
   }
 
-  // public async adminDelete(req: Request, res: Response): Promise<Response> {
-  //   const {id } = req.params;
-  //   const result = await UsersService.delete(undefined, +id);
-  //   if(result.status) {
-  //     return res.status(200).json({message: result.message});
-  //   }
-  //   return res.status(500).json({ message: result.message});
-  // }
+  public async adminDelete(req: Request, res: Response): Promise<Response> {
+    const {id } = req.params;
+    const result = await UsersService.adminDelete(+id);
+    if(result.status) {
+      return res.status(200).json({message: result.message});
+    }
+    if(!result.status && result.message === 'user not found') {
+      return res.status(404).json({ message: result.message});
+    }
+    return res.status(500).json({ message: result.message});
+  }
 
   public async delete(req: Request, res: Response): Promise<Response> {
     const { email } = req.body.decoded;

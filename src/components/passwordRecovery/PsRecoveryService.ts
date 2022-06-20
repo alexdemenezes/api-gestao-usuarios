@@ -62,6 +62,7 @@ class PsRecoveryService {
       return { status: true, message: 'password updated successfully'}
     } catch (e) {
       console.log(e);
+      console.log(e);
       return { status: false, message: 'internal error'};
     }
   }
